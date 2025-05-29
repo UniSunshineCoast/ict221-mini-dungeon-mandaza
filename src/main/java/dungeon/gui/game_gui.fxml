@@ -2,17 +2,57 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dungeon.gui.Controller">
+<BorderPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dungeon.gui.Controller" stylesheets="@/dungeon.css" style="-fx-background-image: url('/background.png'); -fx-background-size: cover;">
+    <top>
+        <Label text="MiniDungeon" styleClass="game-title" BorderPane.alignment="CENTER" />
+    </top>
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
     </padding>
-
+    <left>
+        <VBox spacing="10.0" prefWidth="200.0"  maxWidth="400" alignment="CENTER">
+            <GridPane fx:id="gridPane" prefHeight="400.0" prefWidth="400.0" alignment="CENTER"  styleClass="game-grid">
+            </GridPane>
+        </VBox>
+    </left>
     <center>
-        <GridPane fx:id="gridPane" prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+        <VBox spacing="10.0"  prefWidth="150.0" styleClass="panel-border" alignment="CENTER">
+            <Label text="Difficulty (0-10):" styleClass="section-title"/>
+            <Spinner fx:id="difficultySpinner" min="1" max="10" initialValue="3" styleClass="game-button"/>
+            <Button fx:id="runButton" text="RUN" styleClass="game-button" maxWidth="90" onAction="#handleRunButton"/>
+            <Button fx:id="helpButton" text="HELP" onAction="#handleHelpButton" styleClass="game-button" maxWidth="90"/>
+            <Button fx:id="saveButton" text="SAVE" onAction="#handleSaveButton" styleClass="game-button" maxWidth="90"/>
+            <Button fx:id="loadButton" text="LOAD" onAction="#handleLoadButton" styleClass="game-button" maxWidth="90"/>
+            <Button fx:id="loadHighScoreButton" text="TOP SCORE" onAction="#handleLoadHighScoreButton" styleClass="game-button" maxWidth="120"/>
+            <Label text="Game Control" styleClass="section-title"/>
+            <GridPane hgap="5" vgap="5" alignment="CENTER">
+                <Button fx:id="upButton" text="↑" onAction="#handleUpButton" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Button fx:id="leftButton" text="←" onAction="#handleLeftButton" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Button fx:id="rightButton" text="→" onAction="#handleRightButton" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Button fx:id="downButton" text="↓" onAction="#handleDownButton" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </GridPane>
+        </VBox>
 
-        </GridPane>
     </center>
 
+    <right>
+        <VBox spacing="10.0" prefWidth="300.0" styleClass="panel-border" maxWidth="300" alignment="CENTER">
+            <Label text="Game Log" styleClass="section-title"/>
+            <TextArea fx:id="gameLog" editable="false" wrapText="true" prefRowCount="10" VBox.vgrow="ALWAYS" styleClass="game-log"/>
+        </VBox>
 
+
+    </right>
+    <bottom>
+        <HBox spacing="20.0" alignment="CENTER" styleClass="status-bar">
+            <Label text="Game Status:" styleClass="section-title"/>
+            <Label fx:id="healthLabel" text="HP:10" styleClass="status-label"/>
+            <Label fx:id="scoreLabel" text="Score:0" styleClass="status-label"/>
+            <Label fx:id="goldLabel" text="Gold: 0" styleClass="status-label"/>
+            <Label fx:id="stepsLabel" text="Steps:0" styleClass="status-label"/>
+        </HBox>
+    </bottom>
 </BorderPane>

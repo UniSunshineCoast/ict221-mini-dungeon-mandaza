@@ -76,9 +76,9 @@ public class GameEngine implements Serializable {
             map[0][j] = new WallCell();
             map[height-1][j] = new WallCell();
         }
-        // Place Entry at [1][1]
-        map[1][1] = new EntryCell();
-        player = new Player(1, 1);
+        // Place Entry at bottom left [height-2][1]
+        map[height-2][1] = new EntryCell();
+        player = new Player(height-2, 1);
         // Place Ladder at random location (not on wall or entry)
         int ladderX, ladderY;
         do {
